@@ -1,3 +1,16 @@
+"""
+This file (which I modified from ./pipeline.py) downloads FFIs for a given list of TICs and produces lightcurves.
+In order to process a large number of targets, it downloads the cutouts in "chunks" (by default 100 at a time),
+converts them into lightcurve files, and then deletes the much larger cutout files. 
+
+This enables the program to process a significantly higher number of targets than it could if it downloaded every
+full-frame image at once. 
+
+The program sends notifications at the end of each chunk. You can subscribe to the notifications by going to
+https://ntfy.sh in your browser and subscribing to the "pipeline" topic. On iOS, you'll need to add the ntfy 
+site to your home screen (from the share menu in safari) to make this work. 
+"""
+
 import os
 import re
 import shutil
@@ -125,4 +138,4 @@ def main(tics_path, chunk_size=500):
 
 if __name__ == "__main__":
     import sys
-    main(sys.argv[1], chunk_size=1)
+    main(sys.argv[1], chunk_size=2)

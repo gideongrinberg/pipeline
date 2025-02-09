@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Runs the download program in the docker file
+# Works on windows if you enable the docker/WSL2 integration first
+
+docker build . -t pipeline
+docker run --rm -v "$(pwd)/tics.txt:/app/tics.txt" -v "$(pwd)/cutouts:/app/cutouts" -v "$(pwd)/lightcurves:/app/lightcurves" -v "$(pwd)/output:/app/output" pipeline
